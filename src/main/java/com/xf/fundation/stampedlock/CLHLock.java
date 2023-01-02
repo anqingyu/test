@@ -1,5 +1,6 @@
 package com.xf.fundation.stampedlock;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -82,5 +83,31 @@ public class CLHLock {
 
         // 【优化】能提高GC效率和节省内存空间，请思考：这是为什么？
         // curNode.set(predNode.get());
+    }
+
+    /**
+     * 定义一个静态成员变量cnt，然后开10个线程跑起来，看能是否会有线程安全问题
+     */
+    static int cnt = 0;
+    public static void main(String[] args) throws InterruptedException {
+        final CLHLock lock = new CLHLock();
+
+
+
+
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> {
+                lock.lock();
+
+                cnt++;
+
+                lock.unLock();
+            }).start();
+        }
+
+        // 让main线程休眠2秒，确保其他线程全部执行完
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println();
+        System.out.println("cnt----------->>>" + cnt);
     }
 }
