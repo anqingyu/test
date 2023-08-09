@@ -43,5 +43,15 @@ public class MyStreamDemo1 {
                 .collect(Collectors.toList()); // 转换成一个新的集合
 
         System.out.println(result);
+
+        // 过滤出年龄小于20岁的学生，过滤后的学生的年龄加100输出
+        List<Student> result2 = studentList.stream().filter(s -> s.getAge() < 20)  // 过滤出年龄小于20岁的学生
+                .sorted(Comparator.comparing(Student::getAge ))  //对结果进行排序
+                .map(s -> {s.setAge(s.getAge() +100);
+                    return s;}
+                ) // 提取出 结合中的name属性
+                .collect(Collectors.toList()); // 转换成一个新的集合
+
+        System.out.println(result2);
     }
 }

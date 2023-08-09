@@ -17,7 +17,7 @@ public class ThreadTest {
         };
 //        TimeUnit
         thread.start();
-        System.out.println("线程ID：" + thread.getId() + "，线程名称：" + thread.getName() + "，线程优先级：" + thread.getPriority()
-            + "线程状态：" + thread.getState() + "是否存活:" + thread.isAlive());
+        System.out.println("线程ID：" + thread.getId() + ", 线程名称：" + thread.getName() + ", 线程优先级：" + thread.getPriority()
+            + ", 线程状态：" + thread.getState() + ", 是否存活:" + thread.isAlive());
     }
 }
