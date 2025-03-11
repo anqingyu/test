@@ -35,5 +35,38 @@ public class MyPredicateDemo {
         List<Student> result = filter(students, (s) -> s.getSex().equals("F"));
 
         System.out.println(result.toString());
+        Predicate<String> stringPredicate = s -> s.length() > 0;
+        Predicate<String> negate = stringPredicate.negate();
+        boolean safdsaf_ = negate.test("safdsaf ");
+
+        Predicate<String> stringPredicate2 = String::isBlank;
+        boolean isNotBlank = stringPredicate2.negate().test("sdfsfs");
+        System.out.println(isNotBlank);
+
+        System.out.println(safdsaf_);
+        String safasf = new String("safasf");
+        Predicate<Object> equal = Predicate.isEqual(safasf);
+        boolean test = equal.test("safasf");
+        System.out.println(test);
+
+        int a = getInt();
+        System.out.println(a);
+    }
+
+    public static int getInt() {
+        int a = 10;
+        try {
+            System.out.println(a / 0);
+            a = 20;
+        } catch (ArithmeticException e) {
+            a = 30;
+            return a;
+            //return a 在程序执行到这一步的时候，这里不是return a 而是 return 30；这个返 回路径就 形成了
+            // 但是呢，它发现后面还有finally，所以继续执行finally的内容，a=40
+            // 再次回到以前的路径,继续走return 30，形成返回路径之后，这里的a就不是a变量 了，而是常量30 了  */
+        } finally {
+            a = 40;
+        }
+        return a;
     }
 }
